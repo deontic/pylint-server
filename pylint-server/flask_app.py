@@ -1,15 +1,14 @@
 # server to send back feedback after analyzing python code
 # pip install pylint via console
 
+import os
+import uuid
+import json
+# import threading
+# import pylint.lint
 from flask import Flask
 from flask import request
 from flask import Response
-
-# import pylint.lint
-# import threading
-import uuid
-import json
-import os
 
 
 # def deleteAsync(filename):
