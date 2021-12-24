@@ -6,14 +6,14 @@ from flask import request
 from flask import Response
 
 # import pylint.lint
-import threading
+# import threading
 import uuid
 import json
 import os
 
 
-def deleteAsync(filename):
-    threading.Thread(target=lambda:os.remove(filename)).start()
+# def deleteAsync(filename):
+    # threading.Thread(target=lambda:os.remove(filename)).start()
 
 app = Flask(__name__)
 
@@ -58,6 +58,7 @@ def analyze():
     # # can't get output running from subprocess, so doing this instead
     output = os.popen(f'pylint "{filename}" "{pylint_opts or ""}"').read()
     output = output.rstrip().replace(uuid4, name)
-    deleteAsync(filename)
+    # deleteAsync(filename)
+    os.remove(filename)
     # returns {"output": "[OUTPUT HERE]"}
     return Response(json.dumps({'output':output}), status=200, mimetype='application/json')
