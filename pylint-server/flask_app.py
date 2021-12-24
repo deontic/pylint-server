@@ -6,23 +6,20 @@ from flask import request
 from flask import Response
 
 # import pylint.lint
-# import threading
+import threading
 import uuid
 import json
 import os
 
 
-# def deleteAsync(filename):
-#     threading.Thread(target=lambda: os.remove(filename)).start()
-
+def deleteAsync(filename):
+    threading.Thread(target=lambda:os.remove(filename)).start()
 
 app = Flask(__name__)
 
 # see logs at
 # logs: https://www.pythonanywhere.com/user/unindex/files/var/log/
 # error logs: https://www.pythonanywhere.com/user/unindex/files/var/log/unindex.pythonanywhere.com.error.log
-
-
 @app.route('/')
 def info():
     return """
@@ -42,9 +39,7 @@ def info():
 
     """
 # available at https://unindex.pythonanywhere.com:443/analyze
-
-
-@app.route('/analyze', methods=['POST'])
+@app.route('/analyze', methods = ['POST'])
 def analyze():
     req = request.get_json()
     print(req)
@@ -52,7 +47,7 @@ def analyze():
     src = req.get('code')
     if not (name and src):
         return Response(json.dumps({'error': f"{not name and 'name was not was specified as a parameter' or ''} {not src and 'src was not was specified as a parameter' or ''}"}), status=400, mimetype='application/json')
-    pylint_opts = ', '.join(req.get('pylint_opts') or [])
+    pylint_opts =', '.join(req.get('pylint_opts') or [])
     print("using"+str(pylint_opts))
     uuid4 = str(uuid.uuid4())
 
@@ -61,9 +56,8 @@ def analyze():
         f.write(src)
 
     # # can't get output running from subprocess, so doing this instead
-    output = os.popen(f'pylint {filename} {pylint_opts or ""}').read()
+    output = os.popen(f'pylint "{filename}" "{pylint_opts or ""}"').read()
     output = output.rstrip().replace(uuid4, name)
-    # deleteAsync(filename)
-    os.remove(filename)
+    deleteAsync(filename)
     # returns {"output": "[OUTPUT HERE]"}
-    return Response(json.dumps({'output': output}), status=200, mimetype='application/json')
+    return Response(json.dumps({'output':output}), status=200, mimetype='application/json')
