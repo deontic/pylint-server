@@ -46,10 +46,9 @@ def analyze():
     src = req.get('code')
     if not (name and src):
         return Response(json.dumps({'error': f"{not name and 'name was not was specified as a parameter' or ''} {not src and 'src was not was specified as a parameter' or ''}"}), status=400, mimetype='application/json')
-    pylint_opts =', '.join(req.get('pylint_opts') or [])
-    print("using"+str(pylint_opts))
-    uuid4 = str(uuid.uuid4())
+    pylint_opts = (', '.join('pylint_opts') or [''])
 
+    uuid4 = str(uuid.uuid4())
     filename = uuid4+".py"
     with open(f'./{filename}', 'w') as f:
         f.write(src)
