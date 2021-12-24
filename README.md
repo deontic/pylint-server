@@ -13,8 +13,6 @@ with open('test.py') as f:
     data = {
         "filename": "test.py", # this specifies the name for the file used in the output
         "code": code,          # the code to check
-        # optional pylint_opts, you could leave out this one
-        "pylint_opts": ["--disable=invalid-name,missing-function-docstring"] # if you want, you can specify arguments to pylint, there should be no spaces b/w args 
     }
 
 
@@ -30,4 +28,15 @@ with open('test.py') as f:
 ```
 response:
 
-<img src="https://github.com/Un-index/pylint-server/blob/main/docs/img.png" alt="a screenshot showing the response"></img>
+<img src="https://github.com/Un-index/pylint-server/blob/main/docs/img.png" width=320 alt="a screenshot showing the response"></img>
+
+you can add arguments to pylint by changing `data` in the code above to:
+```python
+data = {
+    "filename": "test.py", # this specifies the name for the file used in the output
+    "code": code,          # the code to check
+    # if you want(optional), you can specify arguments to pylint, there should be no spaces b/w args 
+    "pylint_opts": ["--disable=invalid-name,missing-function-docstring"] 
+}
+
+```
