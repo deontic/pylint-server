@@ -35,7 +35,8 @@ you can add arguments to pylint by changing `data` in the code above to:
 data = {
     "filename": "test.py", # this specifies the name for the file used in the output
     "code": code,          # the code to check
-    # if you want(optional), you can specify arguments to pylint, there should be no spaces b/w args 
+    # if you want(optional), you can specify arguments to pylint, there should be no spaces b/w pylint options, and more arguments can be added as new
+    # strings in the below array
     "pylint_opts": ["--disable=invalid-name,missing-function-docstring"] 
 }
 
