@@ -1,5 +1,5 @@
 # pylint-server
-free static code analysis server for Python, via pylint hosted on [pythonanywhere](https://www.pythonanywhere.com/)
+free static code analysis server for Python, via PyLint hosted on [pythonanywhere](https://www.pythonanywhere.com/)
 
 ## usage
 
